@@ -12,8 +12,7 @@
         theme: {
           extend: {
             screens: {
-              ml: { raw: "(min-aspect-ratio: 5/4)" }, // ✨ medium large
-              //   mL: { raw: "(min-aspect-ratio: 3/2)" }, // ✨ larger long/wide screens
+              ml: { raw: "(min-aspect-ratio: 5/4)" },
             },
           },
         },
@@ -22,6 +21,7 @@
   </head>
   <body class="bg-gray-50">
     <div id="app" class="min-h-screen flex flex-col">
+      <!-- 导航栏保持不变 -->
       <nav
         class="bg-gray-200 shadow-lg fixed top-0 left-1/2 -translate-x-1/2 w-[1800px] max-w-full z-50"
       >
@@ -121,43 +121,41 @@
         </div>
       </nav>
 
-
-
       <main class="flex-grow">
         <!-- 首页内容：仅在 currentView === 'home' 时显示 -->
         <div v-if="currentView === 'home'">
-          <!-- 1. 论文标题、作者、链接 -->
+          <!-- 1. 论文标题、作者、链接（宽度扩大，字体增大） -->
           <div class="bg-white pt-28 md:pt-36 pb-6">
-            <div class="max-w-4xl mx-auto px-4 text-center md:text-left">
-              <h1 class="font-bold text-gray-800 text-2xl md:text-3xl lg:text-4xl leading-tight">
+            <div class="max-w-6xl mx-auto px-6 text-center md:text-left">
+              <h1 class="font-bold text-gray-800 text-3xl md:text-4xl lg:text-5xl leading-tight">
                 A Cell Metamodel Uncovers Mechanistic Drivers of Disease Phenotypes<br>
                 Across Molecular, Cellular, and Tissue Scales
               </h1>
-              <div class="mt-4 text-gray-700 text-sm md:text-base">
+              <div class="mt-4 text-gray-700 text-base md:text-lg">
                 <span class="font-medium">Authors:</span> Chenxi Wang, Jingjing Zheng
               </div>
-              <div class="mt-1 text-gray-600 text-xs md:text-sm">
+              <div class="mt-1 text-gray-600 text-sm md:text-base">
                 <span class="font-medium">Affiliations:</span> 
                 ShanghaiTech University, China
               </div>
-              <div class="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm md:text-base">
+              <div class="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-base md:text-lg">
                 <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12676435/pdf/nihpp-rs7731109v1.pdf" target="_blank" class="text-blue-600 hover:underline">📄 Paper</a>
                 <a href="https://github.com/SunLab-SH/GraphMM" target="_blank" class="text-blue-600 hover:underline">💻 GitHub</a>
               </div>
             </div>
           </div>
 
-          <!-- 2. 第一张图 + 文字说明（你已有的） -->
+          <!-- 2. 第一张图 + 文字说明（宽度扩大，图片可稍大） -->
           <div class="py-12 bg-white">
-            <div class="max-w-4xl mx-auto px-4">
+            <div class="max-w-6xl mx-auto px-6">
               <div class="flex justify-center">
                 <img 
                   src="img/GraphMM-method.png" 
                   alt="GraphMM method overview"
-                  class="w-full max-w-2xl rounded-lg shadow-lg"
+                  class="w-full max-w-3xl rounded-lg shadow-lg"
                 />
               </div>
-              <p class="text-center text-gray-700 text-base md:text-lg mt-6 leading-relaxed">
+              <p class="text-center text-gray-700 text-lg md:text-xl mt-6 leading-relaxed">
                 We introduce Graph-based Metamodeling (GraphMM), a novel framework that integrates models across multiple representations and spatiotemporal scales,
                 by (i) converting input models into universal surrogate representations using probabilistic graphical models; (ii) coupling surrogates across time 
                 scales using a standardized strategy; and (iii) approximate metamodel inference. Validation through synthetic benchmarks and real-world applications
@@ -167,12 +165,10 @@
             </div>
           </div>
 
-          <!-- ========= 新增内容开始 ========= -->
-
-          <!-- 3. 视频区域 -->
+          <!-- 3. 视频区域（宽度扩大，字体增大） -->
           <div class="py-12 bg-gray-50">
-            <div class="max-w-3xl mx-auto px-4">
-              <h2 class="text-2xl md:text-3xl font-bold text-center mb-6">Overview Video</h2>
+            <div class="max-w-5xl mx-auto px-6">
+              <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Overview Video</h2>
               <video 
                 controls 
                 class="w-full rounded-lg shadow-lg"
@@ -180,21 +176,21 @@
                 <source src="video/homepagevideo.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
-              <p class="text-center text-gray-500 text-sm mt-3">Figure: Brief introduction of GraphMM framework.</p>
+              <p class="text-center text-gray-500 text-base md:text-lg mt-3">Figure: Brief introduction of GraphMM framework.</p>
             </div>
           </div>
 
-          <!-- 4. Abstract 标题 + 一段话 -->
+          <!-- 4. Abstract 标题 + 一段话（宽度扩大，字体增大） -->
           <div class="py-12 bg-white">
-            <div class="max-w-3xl mx-auto px-4">
+            <div class="max-w-6xl mx-auto px-6">
               <h2 class="text-4xl md:text-5xl font-bold text-center mb-8">Abstract</h2>
-              <p class="text-gray-700 text-base md:text-lg leading-relaxed">
+              <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
                 Understanding how molecular and cellular dynamics regulate tissue function remains a central challenge in biology. 
                 Here, we develop a graph-based metamodeling framework for modeling of complex biological systems and apply it to 
                 construct a comprehensive metamodel of the β-cell. The metamodel integrates 115 input models that describe various 
                 aspects of β-cell physiology across molecular, cellular, and multicellular spatial scales, spanning ten orders of 
                 magnitude in timescales. Validated against a broad range of experimental data, including fluorescence imaging, the 
-                metamodel uncovers how the interplay between gap junction coupling and K+ channel–mediated signaling regulates islet
+                metamodel uncovers how the interplay between gap junction coupling and K<sup>+</sup> channel–mediated signaling regulates islet
                 function. Moreover, the metamodel identifies and characterizes two types of hub cells, each deterministically driving 
                 islet activity and synchronization via unique ion channel properties. Perturbing channel conductance and hub cell 
                 activity recapitulates distinct diabetic phenotypes, highlighting them as mechanistic drivers of diabetes and potential 
@@ -203,10 +199,9 @@
             </div>
           </div>
 
-          <!-- 5. 三张竖着排列的大图（每张图单独一行） -->
+          <!-- 5. 三张竖着排列的大图（每张图单独一行，宽度扩大） -->
           <div class="py-12 bg-gray-50">
-            <div class="max-w-3xl mx-auto px-4">
-              
+            <div class="max-w-6xl mx-auto px-6">
               <!-- 第一张大图 -->
               <div class="mb-12">
                 <img 
@@ -214,7 +209,7 @@
                   alt="Result 1"
                   class="w-full rounded-lg shadow-lg"
                 />
-                <p class="text-center text-gray-600 text-sm md:text-base mt-3">Multiscale β-cell metamodel under basal and glucose-stimulated conditions</p>
+                <p class="text-center text-gray-600 text-base md:text-lg mt-3">Multiscale β-cell metamodel under basal and glucose-stimulated conditions</p>
               </div>
               
               <!-- 第二张大图 -->
@@ -224,7 +219,7 @@
                   alt="Result 2"
                   class="w-full rounded-lg shadow-lg"
                 />
-                <p class="text-center text-gray-600 text-sm md:text-base mt-3">Effects of varying gap junction coupling and KATP-mediated signaling across scales.</p>
+                <p class="text-center text-gray-600 text-base md:text-lg mt-3">Effects of varying gap junction coupling and K<sub>ATP</sub>-mediated signaling across scales.</p>
               </div>
               
               <!-- 第三张大图 -->
@@ -234,14 +229,31 @@
                   alt="Result 3"
                   class="w-full rounded-lg shadow-lg"
                 />
-                <p class="text-center text-gray-600 text-sm md:text-base mt-3">Schematic representation of the role of intercellular communication and hub cells in β-cell dynamics, activity and islet function.</p>
+                <p class="text-center text-gray-600 text-base md:text-lg mt-3">Schematic representation of the role of intercellular communication and hub cells in β-cell dynamics, activity and islet function.</p>
               </div>
             </div>
           </div>
+        </div>
 
+        <!-- 其他视图（About、详情页等）暂时省略，保持原样 -->
+        <div v-else-if="currentView === 'about'" class="py-16 max-w-6xl mx-auto px-4">
+          <!-- 这里可以保留你原来的 about 内容，为了简洁暂不重复 -->
+          <div class="h-10"></div>
+          <button @click="handleNavigation('home')" class="mb-8 flex items-center text-gray-600 hover:text-gray-800">← Back to Home</button>
+          <p>About page content...</p>
+        </div>
+
+        <div v-else class="py-16 max-w-4xl mx-auto px-4">
+          <div class="h-10"></div>
+          <button @click="handleNavigation('home')" class="mb-8 flex items-center text-gray-600 hover:text-gray-800">← Back</button>
+          <p>Detail page content...</p>
+        </div>
+      </main>
+
+      <!-- 页脚移到 main 外部，位于页面底部 -->
       <footer id="about" class="bg-gray-800 text-white py-4">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-          <p>© 2026 Sun Lab - Shanghai· iHuman Institute</p>
+        <div class="max-w-7xl mx-auto px-6 text-center">
+          <p class="text-base md:text-lg">© 2026 Sun Lab - Shanghai · iHuman Institute</p>
         </div>
       </footer>
     </div>
