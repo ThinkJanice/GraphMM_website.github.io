@@ -1,0 +1,75 @@
+:root {
+  --page-scale: 1;
+  --design-width: 1800px;
+}
+
+html,
+body {
+  margin: 0;
+  background: #f3f4f6;
+  overflow-x: hidden;
+}
+
+#app {
+  width: var(--design-width);
+  margin-left: auto;
+  margin-right: auto;
+  zoom: var(--page-scale);
+  transform-origin: top center;
+}
+
+@media (max-width: 1023px) {
+  #app {
+    width: 100%;
+    zoom: 1;
+  }
+}
+
+html {
+  overflow-y: scroll;
+}
+
+@keyframes slide-up-fade-in {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-up-fade-in {
+  animation: slide-up-fade-in 1.5s ease forwards;
+}
+
+@keyframes slide-left-fade-in {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-left-fade-in {
+  animation: slide-left-fade-in 1s ease forwards;
+}
+
+@keyframes slide-right-fade-in {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-right-fade-in {
+  animation: slide-right-fade-in 1s ease forwards;
+}
