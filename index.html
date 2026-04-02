@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Whole-Cell Modeling Lab</title>
+    <title>GraphMM: Graph-based Metamodeling</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="stylesheet" href="style.css" />
@@ -121,414 +121,127 @@
         </div>
       </nav>
 
+
+
       <main class="flex-grow">
-        <div v-if="currentView === 'home'" class="bg-white pt-28 md:pt-36 pb-6">
-          <div class="max-w-4xl mx-auto px-4 text-center md:text-left">
-            <h1 class="font-bold text-gray-800 text-2xl md:text-3xl lg:text-4xl leading-tight">
-              A Cell Metamodel Uncovers Mechanistic Drivers of Disease Phenotypes<br>
-              Across Molecular, Cellular, and Tissue Scales
-            </h1>
-            <div class="mt-4 text-gray-700 text-sm md:text-base">
-              <span class="font-medium">Authors:</span> Chenxi Wang<sup>1</sup>, Jingjing Zheng<sup>1,2</sup>
-            </div>
-            <div class="mt-1 text-gray-600 text-xs md:text-sm">
-              <span class="font-medium">Affiliations:</span> 
-              <sup>1</sup>ShanghaiTech University, China &nbsp;|&nbsp;
-              <sup>2</sup>MIT, USA
-            </div>
-            <div class="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm md:text-base">
-              <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12676435/pdf/nihpp-rs7731109v1.pdf" target="_blank" class="text-blue-600 hover:underline">📄 Paper</a>
-              <a href="https://github.com/SunLab-SH/GraphMM" target="_blank" class="text-blue-600 hover:underline">💻GitHub</a>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- 新的居中图片 + 文字区域 -->
-        <div class="py-12 bg-white">
-          <div class="max-w-4xl mx-auto px-4">
-            <!-- 图片居中 -->
-            <div class="flex justify-center">
-              <img 
-                src="img/GraphMM-method.png" 
-                alt="Figure description"
-                class="w-full max-w-2xl rounded-lg shadow-lg"
-              />
-            </div>
-            <!-- 图片下方的文字说明（居中） -->
-            <p class="text-center text-gray-700 text-base md:text-lg mt-6 leading-relaxed">
-              We introduce Graph-based Metamodeling (GraphMM), a novel framework that integrates models across multiple representations <br>
-              and spatiotemporal scales, by (i) converting input models into universal surrogate representations using probabilistic graphical models;<br>
-              (ii) coupling surrogates across time scales using a standardized strategy; and (iii) approximate metamodel inference.<br>
-              Validation through synthetic benchmarks and real-world applications shows improved accuracy over existing methods. <br>
-              GraphMM enables quantitative predictions of β-cell dynamics and function across molecular, cellular, and multicellular scales. <br>
-              GraphMM provides a versatile framework for integrating models to uncover the dynamics of complex systems. 
-            </p>
-          </div>
-        </div>
-
-        <div class="h-20 bg-gray-400"></div>
-        <header
-          class="relative bg-gray-900 text-white pt-8 pb-5 md:pt-44 md:pb-32"
-        >
-          <div
-            class="absolute inset-0 bg-[url('img/background.png')] bg-cover bg-center opacity-60"
-          ></div>
-          <div class="relative max-w-4xl mx-auto text-center px-4">
-            <h1
-              class="text-3xl md:text-6xl font-bold mb-4 md:leading-[5.5rem]"
-              ref="headingRef"
-            >
-              <span class="block">Graph-based</span>
-              <span class="block">Whole-Cell Modeling</span>
-            </h1>
-          </div>
-        </header>
-
-        <div class="h-4 bg-gray-400 shadow-lg"></div>
-
-        <div
-          :class="[
-            'items-center bg-gray-200 shadow-lg pt-6 relative',
-            isMobile ? 'flex flex-col space-y-6 px-6' : 'flex flex-row space-x-8 space-y-0 pl-24 px-0'
-          ]"
-        >
-          <div
-            :class="['flex-1 mx-auto', isMobile ? 'max-w-lg' : 'max-w-none']"
-            ref="subheadingRef"
-          >
-            <p
-              :class="['text-gray-600 px-6 ml:px-24', isMobile ? 'text-xl' : 'text-2xl leading-relaxed']"
-            >
-              ODE whole-cell modeling is a powerful approach to simulate and
-              understand the complex biological processes within a cell. By
-              representing cellular components and their interactions as
-              graphs, we can capture the dynamic behavior of the entire cell
-              in a comprehensive manner.
-            </p>
-          </div>
-
-          <div
-            :class="[
-              'relative mx-auto pb-6',
-              isMobile ? 'w-full max-w-lg' : 'w-3/5 max-w-none pt-0'
-            ]"
-            ref="homeVideoRef"
-          >
-            <div
-              v-if="showPlayButton"
-              class="absolute top-0 left-0 right-0 bottom-6 flex items-center justify-center bg-black bg-opacity-40 z-10 cursor-pointer rounded-lg"
-              @click="playVideo"
-            >
-              <span class="text-white text-6xl">▶</span>
-            </div>
-            <video
-              ref="videoRef"
-              :class="['w-full', isMobile ? 'rounded-lg' : 'mb-[-90px] rounded-none']"
-              muted
-              loop
-              playsinline
-              @click="togglePlay"
-              poster="img/homepagevideo.png"
-            >
-              <source src="video/homepagevideo.mp4" type="video/mp4" />
-            </video>
-          </div>
-        </div>
-
-          <section id="products" class="py-4 max-w-[1400px] mx-auto px-4 mb-12">
-            <h2
-              :class="[
-                'text-3xl font-bold text-left mb-6 mx-auto',
-                isMobile ? 'mt-12 max-w-lg' : 'mt-20 max-w-none'
-              ]"
-              ref="resRef"
-            >
-              Research
-            </h2>
-            <div
-              :class="[
-                'grid gap-8 mx-auto',
-                isMobile ? 'max-w-lg' : 'grid-cols-3 max-w-none'
-              ]"
-            >
-              <info-card
-                v-for="p in products"
-                :key="p.id"
-                :item="p"
-                @click="currentView = 'product-' + p.id"
-              >
-              </info-card>
-            </div>
-          </section>
-
-          <section
-            id="tutorials"
-            class="py-4 max-w-[1400px] mx-auto px-4 mb-12"
-          >
-            <h2
-              :class="[
-                'text-3xl font-bold text-right mb-6 mx-auto',
-                isMobile ? 'max-w-lg' : 'max-w-none'
-              ]"
-              ref="newRef"
-            >
-              News & Tutorials
-            </h2>
-            <div
-              :class="[
-                'grid gap-8 mx-auto',
-                isMobile ? 'max-w-lg' : 'grid-cols-3 max-w-none'
-              ]"
-            >
-              <info-card
-                v-for="t in tutorials"
-                :key="t.id"
-                :item="t"
-                :subtitle="t.time"
-                @click="currentView = 'tutorial-' + t.id"
-              >
-              </info-card>
-            </div>
-          </section>
-        </div>
-
-        <div
-          v-else-if="currentView === 'about'"
-          class="py-16 max-w-6xl mx-auto px-4"
-        >
-          <div class="h-10"></div>
-          <button
-            @click="handleNavigation('home')"
-            class="mb-8 flex items-center text-gray-600 hover:text-gray-800 transition"
-          >
-            <svg class="h-5 w-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            Back to Home
-          </button>
-
-          <div class="mb-16">
-            <h1
-              id="about-members"
-              class="text-4xl font-bold mb-12 text-center text-gray-800 scroll-mt-40"
-            >
-              Our Team
-            </h1>
-
-            <div :class="['grid gap-8', isMobile ? '' : 'grid-cols-3']">
-              <div
-                v-for="(member, index) in members"
-                :key="index"
-                class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center"
-              >
-                <div
-                  class="w-32 h-32 mb-4 rounded-full overflow-hidden bg-gray-100 border-4 border-gray-50"
-                >
-                  <img
-                    :src="member.image"
-                    :alt="member.name"
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-
-                <h3 class="text-xl font-bold text-gray-800">
-                  {{ member.name }}
-                </h3>
-                <p class="text-blue-600 font-medium mb-2">{{ member.role }}</p>
-                <p class="text-gray-600 text-sm">{{ member.description }}</p>
+        <!-- 首页内容：仅在 currentView === 'home' 时显示 -->
+        <div v-if="currentView === 'home'">
+          <!-- 1. 论文标题、作者、链接 -->
+          <div class="bg-white pt-28 md:pt-36 pb-6">
+            <div class="max-w-4xl mx-auto px-4 text-center md:text-left">
+              <h1 class="font-bold text-gray-800 text-2xl md:text-3xl lg:text-4xl leading-tight">
+                A Cell Metamodel Uncovers Mechanistic Drivers of Disease Phenotypes<br>
+                Across Molecular, Cellular, and Tissue Scales
+              </h1>
+              <div class="mt-4 text-gray-700 text-sm md:text-base">
+                <span class="font-medium">Authors:</span> Chenxi Wang, Jingjing Zheng
+              </div>
+              <div class="mt-1 text-gray-600 text-xs md:text-sm">
+                <span class="font-medium">Affiliations:</span> 
+                ShanghaiTech University, China
+              </div>
+              <div class="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm md:text-base">
+                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12676435/pdf/nihpp-rs7731109v1.pdf" target="_blank" class="text-blue-600 hover:underline">📄 Paper</a>
+                <a href="https://github.com/SunLab-SH/GraphMM" target="_blank" class="text-blue-600 hover:underline">💻 GitHub</a>
               </div>
             </div>
           </div>
 
-          <hr class="border-gray-300 mb-16" />
-
-          <div :class="['flex gap-12', isMobile ? 'flex-col' : 'flex-row']">
-            <div :class="isMobile ? '' : 'w-1/2'">
-              <h2
-                id="about-contact"
-                class="text-3xl font-bold mb-6 text-gray-800"
-              >
-                Contact Us
-              </h2>
-              <p class="text-gray-600 mb-6 leading-relaxed">
-                We are always looking for motivated students and collaborators.
-                If you are interested in whole-cell modeling, please don't
-                hesitate to reach out.
+          <!-- 2. 第一张图 + 文字说明（你已有的） -->
+          <div class="py-12 bg-white">
+            <div class="max-w-4xl mx-auto px-4">
+              <div class="flex justify-center">
+                <img 
+                  src="img/GraphMM-method.png" 
+                  alt="GraphMM method overview"
+                  class="w-full max-w-2xl rounded-lg shadow-lg"
+                />
+              </div>
+              <p class="text-center text-gray-700 text-base md:text-lg mt-6 leading-relaxed">
+                We introduce Graph-based Metamodeling (GraphMM), a novel framework that integrates models across multiple representations and spatiotemporal scales,
+                by (i) converting input models into universal surrogate representations using probabilistic graphical models; (ii) coupling surrogates across time 
+                scales using a standardized strategy; and (iii) approximate metamodel inference. Validation through synthetic benchmarks and real-world applications
+                shows improved accuracy over existing methods. GraphMM enables quantitative predictions of β-cell dynamics and function across molecular, cellular, 
+                and multicellular scales. GraphMM provides a versatile framework for integrating models to uncover the dynamics of complex systems.
               </p>
-
-              <div class="space-y-4">
-                <div class="flex items-start">
-                  <span class="text-2xl mr-4">📍</span>
-                  <div>
-                    <h4 class="font-bold text-gray-800">Address</h4>
-                    <p class="text-gray-600">
-                      China, Shang Hai Shi, Pudong, 华夏中路393号 <br />
-                      Shanghaitech University
-                    </p>
-                  </div>
-                </div>
-
-                <div class="flex items-start">
-                  <span class="text-2xl mr-4">📧</span>
-                  <div>
-                    <h4 class="font-bold text-gray-800">Email</h4>
-                    <a
-                      href="mailto:cellmod@university.edu"
-                      class="text-blue-600 hover:underline"
-                      >cellmod@university.edu</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div
-              :class="[
-                'rounded-lg overflow-hidden shadow-md relative bg-gray-200',
-                isMobile ? 'h-64' : 'w-1/2 h-auto'
-              ]"
-            >
-              <a
-                href="https://www.google.com/maps/place/ShanghaiTech+University/@31.1763741,121.5898769,17z/data=!3m1!4b1!4m6!3m5!1s0x35b27828f381499b:0x5ae88f32ad8196b1!8m2!3d31.1763741!4d121.5924518!16s%2Fm%2F0qftcsg?entry=ttu&g_ep=EgoyMDI1MTIwNy4wIKXMDSoASAFQAw%3D%3D"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="block w-full h-full relative group"
-              >
-                <img
-                  src="img/map.png"
-                  alt="Lab Location"
-                  class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
-                />
-
-                <div
-                  class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-10 group-hover:bg-opacity-30 transition duration-300"
-                >
-                  <div
-                    class="bg-white text-gray-800 px-5 py-2 rounded-full opacity-0 group-hover:opacity-100 transition duration-300 font-semibold shadow-lg transform translate-y-4 group-hover:translate-y-0 flex items-center"
-                  >
-                    <svg
-                      class="w-4 h-4 mr-2"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-                      />
-                    </svg>
-                    Open in Maps
-                  </div>
-                </div>
-              </a>
             </div>
           </div>
-        </div>
 
-        <div v-else class="py-16 max-w-4xl mx-auto px-4">
-          <div class="h-10"></div>
-          <button
-            @click="handleNavigation('home', currentDetail.type === 'Research' ? '#products' : '#tutorials', 'auto')"
-            class="mb-8 flex items-center text-gray-600 hover:text-gray-800 transition"
-          >
-            <svg class="h-5 w-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            Back to {{ currentDetail.type }}
-          </button>
+          <!-- ========= 新增内容开始 ========= -->
 
-          <div
-            v-if="currentDetail && currentDetail.data"
-            class="bg-white p-8 rounded-lg shadow-md"
-          >
-            <div :class="['flex gap-8', isMobile ? 'flex-col' : 'flex-row']">
-              <div
-                :class="[
-                    'bg-gray-100 w-full rounded-lg flex items-center justify-center cursor-zoom-in group overflow-hidden',
-                    currentDetail.data.isHorizontal
-                      ? (isMobile ? 'h-36' : 'h-72')
-                      : (isMobile ? 'h-48' : 'h-96')
-                ]"
-                @click="openModal(currentDetail.data.image)"
+          <!-- 3. 视频区域 -->
+          <div class="py-12 bg-gray-50">
+            <div class="max-w-3xl mx-auto px-4">
+              <h2 class="text-2xl md:text-3xl font-bold text-center mb-6">Overview Video</h2>
+              <video 
+                controls 
+                class="w-full rounded-lg shadow-lg"
               >
-                <img
-                  v-if="currentDetail.data.image"
-                  :src="currentDetail.data.image"
-                  class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
-                />
-                <span v-else class="text-8xl"
-                  >{{ currentDetail.data.icon }}</span
-                >
-              </div>
-              <div class="flex flex-col">
-                <h1 class="text-3xl font-bold mb-4">
-                  {{ currentDetail.data.title }}
-                </h1>
-                <div class="prose max-w-none">
-                  <p class="text-gray-700 mb-4">
-                    {{ currentDetail.data.description }}
-                  </p>
-                </div>
+                <source src="video/homepagevideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <p class="text-center text-gray-500 text-sm mt-3">Figure: Brief introduction of GraphMM framework.</p>
+            </div>
+          </div>
 
-                <p v-if="currentDetail.data.ref" class="text-gray-600 mt-auto">
-                  GitHub:
-                  <a
-                    :href="currentDetail.data.ref"
-                    target="_blank"
-                    class="text-blue-600 underline"
-                    >{{ currentDetail.data.ref.replace('https://', '') }}</a
-                  >
-                </p>
-                <p
-                  v-if="currentDetail.data.time"
-                  class="text-gray-500 mt-auto text-sm"
-                >
-                  {{ currentDetail.data.time }}
-                </p>
+          <!-- 4. Abstract 标题 + 一段话 -->
+          <div class="py-12 bg-white">
+            <div class="max-w-3xl mx-auto px-4">
+              <h2 class="text-4xl md:text-5xl font-bold text-center mb-8">Abstract</h2>
+              <p class="text-gray-700 text-base md:text-lg leading-relaxed">
+                Understanding how molecular and cellular dynamics regulate tissue function remains a central challenge in biology. 
+                Here, we develop a graph-based metamodeling framework for modeling of complex biological systems and apply it to 
+                construct a comprehensive metamodel of the β-cell. The metamodel integrates 115 input models that describe various 
+                aspects of β-cell physiology across molecular, cellular, and multicellular spatial scales, spanning ten orders of 
+                magnitude in timescales. Validated against a broad range of experimental data, including fluorescence imaging, the 
+                metamodel uncovers how the interplay between gap junction coupling and K+ channel–mediated signaling regulates islet
+                function. Moreover, the metamodel identifies and characterizes two types of hub cells, each deterministically driving 
+                islet activity and synchronization via unique ion channel properties. Perturbing channel conductance and hub cell 
+                activity recapitulates distinct diabetic phenotypes, highlighting them as mechanistic drivers of diabetes and potential 
+                therapeutic targets. Our metamodeling framework is broadly applicable to modeling other complex biological systems.
+              </p>
+            </div>
+          </div>
+
+          <!-- 5. 三张竖着排列的大图（每张图单独一行） -->
+          <div class="py-12 bg-gray-50">
+            <div class="max-w-3xl mx-auto px-4">
+              
+              <!-- 第一张大图 -->
+              <div class="mb-12">
+                <img 
+                  src="img/fig2.png" 
+                  alt="Result 1"
+                  class="w-full rounded-lg shadow-lg"
+                />
+                <p class="text-center text-gray-600 text-sm md:text-base mt-3">Multiscale β-cell metamodel under basal and glucose-stimulated conditions</p>
+              </div>
+              
+              <!-- 第二张大图 -->
+              <div class="mb-12">
+                <img 
+                  src="img/fig4.png" 
+                  alt="Result 2"
+                  class="w-full rounded-lg shadow-lg"
+                />
+                <p class="text-center text-gray-600 text-sm md:text-base mt-3">Effects of varying gap junction coupling and KATP-mediated signaling across scales.</p>
+              </div>
+              
+              <!-- 第三张大图 -->
+              <div>
+                <img 
+                  src="img/fig7.png" 
+                  alt="Result 3"
+                  class="w-full rounded-lg shadow-lg"
+                />
+                <p class="text-center text-gray-600 text-sm md:text-base mt-3">Schematic representation of the role of intercellular communication and hub cells in β-cell dynamics, activity and islet function.</p>
               </div>
             </div>
           </div>
-        </div>
-      </main>
-
-      <div
-        v-if="showModal"
-        class="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4"
-        @click.self="closeModal"
-      >
-        <div class="relative max-w-6xl max-h-[90vh]">
-          <button
-            @click="closeModal"
-            class="absolute -top-10 right-0 text-white text-2xl"
-            aria-label="Close"
-          >
-            &times;
-          </button>
-          <img
-            :src="modalImage"
-            class="max-w-full max-h-[90vh] object-contain"
-          />
-        </div>
-      </div>
 
       <footer id="about" class="bg-gray-800 text-white py-4">
         <div class="max-w-6xl mx-auto px-4 text-center">
-          <p>© 2025 Whole-Cell Modeling Lab · Department of Bioengineering</p>
-          <p>
-            Email:
-            <a
-              href="mailto:cellmod@university.edu"
-              class="text-blue-600 underline"
-              >cellmod@university.edu</a
-            >
-          </p>
+          <p>© 2026 Sun Lab - Shanghai· iHuman Institute</p>
         </div>
       </footer>
     </div>

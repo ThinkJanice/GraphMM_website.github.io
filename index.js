@@ -107,7 +107,7 @@ createApp({
     const openModal = (imgUrl) => {
       if (!imgUrl) return;
       modalImage.value = imgUrl;
-      showModal.value = true;
+      showModal.value = false;
       document.body.style.overflow = "hidden";
     };
 
