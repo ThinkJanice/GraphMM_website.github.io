@@ -112,19 +112,19 @@
             </div>
           </div>
 
-          <!-- ========= 新增 Toy Model 模块 ========= -->
+          <!-- ========= Toy Model 模块（修改版：公式右侧加图） ========= -->
           <div class="bg-white py-12">
             <div class="w-full max-w-[1400px] mx-auto px-4 md:px-8">
-              <!-- 标题带边框修饰（左侧边框） -->
+              <!-- 标题带边框修饰 -->
               <div class="mb-8">
                 <h2
                   class="text-4xl md:text-5xl font-bold text-gray-800 border-l-8 border-blue-500 pl-4 inline-block"
                 >
-                  Toy Model
+                  Benchmark - Toy GSIS metamodel
                 </h2>
               </div>
 
-              <!-- 左右两栏：左侧文字介绍，右侧图片 -->
+              <!-- 左右两栏：左侧文字介绍，右侧图片（保持不变） -->
               <div class="flex flex-col md:flex-row gap-8 mb-12">
                 <div class="flex-1">
                   <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
@@ -146,7 +146,7 @@
                 </div>
                 <div class="flex-1 flex justify-center">
                   <img
-                    src="img/toymodel.png"
+                    src="img/toy_model_figure.png"
                     alt="Toy Model Schematic"
                     class="w-full max-w-md rounded-lg shadow-lg object-contain"
                     onerror="this.src='https://via.placeholder.com/400x300?text=Toy+Model+Figure'"
@@ -154,52 +154,154 @@
                 </div>
               </div>
 
-              <!-- 下方：公式及 GraphMM 耦合讲解 -->
+              <!-- 下方：公式及 GraphMM 耦合讲解（现在改为左右两栏：左侧公式讲解，右侧小图） -->
               <div class="mt-8 bg-gray-50 p-6 rounded-lg shadow-inner">
+                <div class="flex flex-col md:flex-row gap-6">
+                  <!-- 左侧：公式和文字讲解 -->
+                  <div class="flex-1">
+                    <h3 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-4">
+                      GraphMM Coupling of the Toy Model
+                    </h3>
+                    <div class="overflow-x-auto">
+                      <p class="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
+                        The coupling between the cell surrogate model and the body
+                        surrogate model is achieved by introducing a latent coupling
+                        variable <span class="font-mono font-bold">S<sup>c</sup><sub>cell</sub></span>.
+                        The connecting variables are the insulin secretion rates
+                        <span class="font-mono">S<sup>C</sup></span> (cell) and
+                        <span class="font-mono">S<sup>B</sup></span> (body). Their
+                        conditional distributions are defined as:
+                      </p>
+                      <div class="bg-white p-4 rounded-md shadow-sm mb-4 text-center">
+                        <p class="text-gray-800 text-lg md:text-xl font-mono">
+                          P(S<sup>B</sup><sub>t+1</sub> | S<sup>c</sup><sub>cell,t</sub>, S<sup>B</sup><sub>t</sub>) =
+                          N( ω₁·S<sup>c</sup><sub>cell,t</sub> + (1‑ω₁)·f<sup>B</sup>(S<sup>B</sup><sub>t</sub>, D<sub>t</sub>), φ₁ )
+                        </p>
+                        <p class="text-gray-800 text-lg md:text-xl font-mono mt-2">
+                          P(S<sup>C</sup><sub>t+1</sub> | S<sup>c</sup><sub>cell,t</sub>, S<sup>C</sup><sub>t</sub>) =
+                          N( ω₂·S<sup>c</sup><sub>cell,t</sub> + (1‑ω₂)·f<sup>C</sup>(S<sup>C</sup><sub>t</sub>, G<sub>t</sub>), φ₂ )
+                        </p>
+                      </div>
+                      <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                        Here, <span class="font-mono">f<sup>B</sup></span> and
+                        <span class="font-mono">f<sup>C</sup></span> are the original
+                        subsystem dynamics, <span class="font-mono">ω₁, ω₂</span> are
+                        weights determined by the overlap between the coupling variable
+                        distribution and each connecting variable distribution.
+                        The coupling variable itself is defined as a mixture of the
+                        two connecting variable distributions. By constructing a
+                        probabilistic graphical model (PGM) with edges from the coupling
+                        variable to both connecting variables, GraphMM enables joint
+                        inference using algorithms such as the Unscented Kalman Filter
+                        (UKF) or Particle Filter (PF). This approach significantly
+                        improves prediction accuracy compared to traditional
+                        common‑timestep integration (CTI).
+                      </p>
+                    </div>
+                  </div>
+                  <!-- 右侧：新增小图（与公式同行） -->
+                  <div class="flex-shrink-0 flex justify-center md:justify-end items-center">
+                    <img
+                      src="img/toymodel2.png"
+                      alt="Toy Model Coupling Diagram"
+                      class="w-64 md:w-80 rounded-lg shadow-md object-contain"
+                      onerror="this.src='https://via.placeholder.com/300x200?text=Coupling+Diagram'"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- ========= Real Model 模块 (MuBCM) - 修改版：文字在上，图单独一行 ========= -->
+          <div class="bg-gray-50 py-12">
+            <div class="w-full max-w-[1400px] mx-auto px-4 md:px-8">
+              <!-- 标题带边框修饰 -->
+              <div class="mb-8">
+                <h2
+                  class="text-4xl md:text-5xl font-bold text-gray-800 border-l-8 border-green-500 pl-4 inline-block"
+                >
+                  Multiscale β-cell Metamodel (MuBCM)
+                </h2>
+              </div>
+
+              <!-- 文字介绍（放在图的上方） -->
+              <div class="mb-8">
+                <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                  The <strong>Multiscale β-cell Metamodel (MuBCM)</strong> integrates three
+                  existing mechanistic models that describe different aspects and scales of
+                  pancreatic β-cell physiology: the <strong>Vesicle Exocytosis (VE) model</strong>
+                  (molecular scale, milliseconds), the <strong>Insulin Secretion Kinetic (ISK) model</strong>
+                  (cellular scale, seconds), and the <strong>Islet Cell Network (ICN) model</strong>
+                  (multicellular scale, minutes). Each model is first converted into a probabilistic
+                  surrogate model with a unified time step (0.01 min). The VE and ISK models are
+                  coupled via a latent variable <em>N<sub>FR</sub></em> (vesicle fusion and release),
+                  while the ISK and ICN models are coupled via the cytosolic Ca²⁺ concentration
+                  <em>Ca<sub>ic</sub></em>. The resulting metamodel spans 10 orders of magnitude
+                  in time and captures glucose‑stimulated insulin secretion, calcium dynamics,
+                  and islet synchronization.
+                </p>
+                <p class="text-gray-700 text-lg md:text-xl leading-relaxed mt-4">
+                  Validated against experimental data (fluorescence imaging, patch‑clamp), MuBCM
+                  reveals how gap junction coupling and K<sub>ATP</sub> channel signaling regulate
+                  islet function, and identifies two types of hub cells that drive islet activity.
+                </p>
+              </div>
+
+              <!-- 图片单独一行（居中） -->
+              <div class="flex justify-center mb-12">
+                <img
+                  src="img/real_model.png"
+                  alt="Multiscale β-cell Metamodel Overview"
+                  class="w-full max-w-2xl rounded-lg shadow-lg object-contain"
+                  onerror="this.src='https://via.placeholder.com/800x400?text=MuBCM+Figure'"
+                />
+              </div>
+
+              <!-- 下方：公式及 GraphMM 耦合讲解 -->
+              <div class="mt-8 bg-white p-6 rounded-lg shadow-inner">
                 <h3 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-4">
-                  GraphMM Coupling of the Toy Model
+                  GraphMM Coupling of the Three β‑cell Models
                 </h3>
                 <div class="overflow-x-auto">
                   <p class="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
-                    The coupling between the cell surrogate model and the body
-                    surrogate model is achieved by introducing a latent coupling
-                    variable <span class="font-mono font-bold">S<sup>c</sup><sub>cell</sub></span>.
-                    The connecting variables are the insulin secretion rates
-                    <span class="font-mono">S<sup>C</sup></span> (cell) and
-                    <span class="font-mono">S<sup>B</sup></span> (body). Their
-                    conditional distributions are defined as:
+                    The three surrogate models (VE, ISK, ICN) are coupled by introducing two
+                    latent coupling variables: <span class="font-mono font-bold">N<sub>FR</sub></span>
+                    (linking VE and ISK) and <span class="font-mono font-bold">Ca<sub>ic</sub></span>
+                    (linking ISK and ICN). The connecting variables are:
                   </p>
-                  <div class="bg-white p-4 rounded-md shadow-sm mb-4 text-center">
+                  <ul class="list-disc pl-6 mb-4 text-gray-700 text-lg md:text-xl">
+                    <li>For VE–ISK coupling: the number of fused vesicles <span class="font-mono">N<sub>F</sub><sup>VE</sup></span> and the number of releasing vesicles <span class="font-mono">N<sub>R</sub><sup>ISK</sup></span> are connected via <span class="font-mono">N<sub>FR</sub></span>.</li>
+                    <li>For ISK–ICN coupling: the cytosolic Ca²⁺ concentrations <span class="font-mono">Ca<sub>ic</sub><sup>ISK</sup></span> and <span class="font-mono">Ca<sub>ic</sub><sup>ICN</sup></span> are connected via <span class="font-mono">Ca<sub>ic</sub></span>.</li>
+                  </ul>
+                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
+                    The conditional distributions for the coupling variables are defined analogously to the toy model.
+                    For the VE–ISK coupling:
+                  </p>
+                  <div class="bg-gray-50 p-4 rounded-md shadow-sm mb-4 text-center">
                     <p class="text-gray-800 text-lg md:text-xl font-mono">
-                      P(S<sup>B</sup><sub>t+1</sub> | S<sup>c</sup><sub>cell,t</sub>, S<sup>B</sup><sub>t</sub>) =
-                      N( ω₁·S<sup>c</sup><sub>cell,t</sub> + (1‑ω₁)·f<sup>B</sup>(S<sup>B</sup><sub>t</sub>, D<sub>t</sub>), φ₁ )
+                      P(N<sub>F</sub><sup>VE</sup><sub>t+1</sub> | N<sub>FR,t</sub>, N<sub>F</sub><sup>VE</sup><sub>t</sub>) = N( α·N<sub>FR,t</sub> + (1‑α)·f<sup>VE</sup>(…), ψ<sub>1</sub> )
                     </p>
                     <p class="text-gray-800 text-lg md:text-xl font-mono mt-2">
-                      P(S<sup>C</sup><sub>t+1</sub> | S<sup>c</sup><sub>cell,t</sub>, S<sup>C</sup><sub>t</sub>) =
-                      N( ω₂·S<sup>c</sup><sub>cell,t</sub> + (1‑ω₂)·f<sup>C</sup>(S<sup>C</sup><sub>t</sub>, G<sub>t</sub>), φ₂ )
+                      P(N<sub>R</sub><sup>ISK</sup><sub>t+1</sub> | N<sub>FR,t</sub>, N<sub>R</sub><sup>ISK</sup><sub>t</sub>) = N( β·N<sub>FR,t</sub> + (1‑β)·f<sup>ISK</sup>(…), ψ<sub>2</sub> )
                     </p>
                   </div>
                   <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
-                    Here, <span class="font-mono">f<sup>B</sup></span> and
-                    <span class="font-mono">f<sup>C</sup></span> are the original
-                    subsystem dynamics, <span class="font-mono">ω₁, ω₂</span> are
-                    weights determined by the overlap between the coupling variable
-                    distribution and each connecting variable distribution.
-                    The coupling variable itself is defined as a mixture of the
-                    two connecting variable distributions. By constructing a
-                    probabilistic graphical model (PGM) with edges from the coupling
-                    variable to both connecting variables, GraphMM enables joint
-                    inference using algorithms such as the Unscented Kalman Filter
-                    (UKF) or Particle Filter (PF). This approach significantly
-                    improves prediction accuracy compared to traditional
-                    common‑timestep integration (CTI).
+                    Similarly, the Ca²⁺ coupling uses the same weighted mixture approach.
+                    The full probabilistic graphical model (PGM) includes directed edges from each coupling
+                    variable to its respective connecting variables. Inference is performed using
+                    Unscented Kalman Filters (UKF) or Particle Filters (PF), enabling the metamodel
+                    to predict β-cell dynamics across scales with high accuracy. The resulting MuBCM
+                    outperforms both the individual input models and traditional common‑timestep
+                    integration (CTI) methods, as shown in the supplementary figures (Fig. S3F).
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <!-- ========= Toy Model 模块结束 ========= -->
-        </div>
+
 
         <!-- 其他视图（About 和详情页）保持占位 -->
         <div v-else-if="currentView === 'about'" class="py-16 max-w-6xl mx-auto px-4">
