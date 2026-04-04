@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GraphMM: Graph-based Metamodeling</title>
-    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="icon" type="image/png" href="img/favicon.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="stylesheet" href="style.css" />
@@ -22,7 +22,7 @@
   </head>
   <body class="bg-gray-50">
     <div id="app" class="min-h-screen flex flex-col">
-      <!-- 导航栏保持不变（但可以稍微调整宽度） -->
+      <!-- 导航栏（已删除所有菜单按钮，仅保留移动端汉堡菜单，但移动端菜单也已清空） -->
       <nav
         class="bg-gray-200 shadow-lg fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-full z-50"
       >
@@ -32,58 +32,9 @@
             isMobile ? 'px-4' : 'px-8'
           ]"
         >
-          <div class="flex justify-between items-center py-4">
-            <div v-if="!isMobile" class="flex space-x-10 items-center">
-              <a
-                @click="handleNavigation('home', '#app')"
-                class="cursor-pointer text-xl text-gray-600 hover:text-gray-400"
-                >Home</a
-              >
-              <a
-                @click="handleNavigation('home', '#products')"
-                class="cursor-pointer text-xl text-gray-600 hover:text-gray-400"
-                >Research</a
-              >
-              <a
-                @click="handleNavigation('home', '#tutorials')"
-                class="cursor-pointer text-xl text-gray-600 hover:text-gray-400"
-                >News</a
-              >
-
-              <div
-                class="relative h-full flex items-center"
-                @mouseenter="isAboutHovered = true"
-                @mouseleave="isAboutHovered = false"
-              >
-                <a
-                  @click="handleNavigation('about')"
-                  class="cursor-pointer text-xl text-gray-600 hover:text-gray-400"
-                >
-                  About
-                </a>
-
-                <div
-                  v-if="isAboutHovered"
-                  class="absolute top-full left-1/2 transform -translate-x-1/2 bg-gray-200 text-gray-600 shadow-xl rounded-b-md py-2 w-28 flex flex-col z-50 transition-opacity duration-200"
-                >
-                  <a
-                    @click="handleNavigation('about', '#about-members')"
-                    class="px-2 py-3 hover:bg-gray-300 hover:text-gray-800 cursor-pointer text-base text-center transition-colors"
-                  >
-                    Members
-                  </a>
-
-                  <a
-                    @click="handleNavigation('about', '#about-contact')"
-                    class="px-2 py-3 hover:bg-gray-300 hover:text-gray-800 cursor-pointer text-base text-center transition-colors"
-                  >
-                    Contact Us
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Mobile button -->
+          <div class="flex justify-end items-center py-4">
+            <!-- 桌面端菜单已全部删除 -->
+            <!-- Mobile button 保留，但移动端菜单已清空 -->
             <button
               v-if="isMobile"
               class="text-3xl"
@@ -93,54 +44,50 @@
             </button>
           </div>
 
-          <!-- Mobile Nav -->
+          <!-- Mobile Nav 已清空 -->
           <div
             v-if="isMobile && isMobileMenuOpen"
             class="flex flex-col space-y-4 pb-4"
-          >
-            <a
-              @click="handleNavigation('home', '#app')"
-              class="cursor-pointer text-gray-600 hover:text-gray-400 text-lg"
-              >Home</a
-            >
-            <a
-              @click="handleNavigation('home', '#products')"
-              class="cursor-pointer text-gray-600 hover:text-gray-400 text-lg"
-              >Research</a
-            >
-            <a
-              @click="handleNavigation('home', '#tutorials')"
-              class="cursor-pointer text-gray-600 hover:text-gray-400 text-lg"
-              >News</a
-            >
-            <a
-              @click="handleNavigation('about')"
-              class="cursor-pointer text-gray-600 hover:text-gray-400 text-lg"
-              >About</a
-            >
-          </div>
+          ></div>
         </div>
       </nav>
 
       <main class="flex-grow">
         <!-- 首页内容 -->
         <div v-if="currentView === 'home'">
-          <!-- 1. 论文标题、作者、链接（全宽布局，极小左右内边距） -->
+          <!-- 论文标题、作者、链接 -->
           <div class="bg-white pt-28 md:pt-36 pb-6">
-            <div class="w-full max-w-[1400px] mx-auto px-4 md:px-8 text-center md:text-left">
-              <h1 class="font-bold text-gray-800 text-4xl md:text-5xl lg:text-6xl leading-tight">
-                A Cell Metamodel Uncovers Mechanistic Drivers of Disease Phenotypes Across Molecular, Cellular, and Tissue Scales
+            <div
+              class="w-full max-w-[1400px] mx-auto px-4 md:px-8 text-center md:text-left"
+            >
+              <h1
+                class="font-bold text-gray-800 text-4xl md:text-5xl lg:text-6xl leading-tight"
+              >
+                A Cell Metamodel Uncovers Mechanistic Drivers of Disease Phenotypes
+                Across Molecular, Cellular, and Tissue Scales
               </h1>
               <div class="mt-6 text-gray-700 text-xl md:text-2xl">
                 <span class="font-medium">Authors:</span> Chenxi Wang, Jingjing Zheng
               </div>
               <div class="mt-2 text-gray-600 text-lg md:text-xl">
-                <span class="font-medium">Affiliations:</span> 
+                <span class="font-medium">Affiliations:</span>
                 ShanghaiTech University, China
               </div>
-              <div class="mt-4 flex flex-wrap gap-x-8 gap-y-2 text-lg md:text-xl">
-                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12676435/pdf/nihpp-rs7731109v1.pdf" target="_blank" class="text-blue-600 hover:underline">📄 Paper</a>
-                <a href="https://github.com/SunLab-SH/GraphMM" target="_blank" class="text-blue-600 hover:underline">💻 GitHub</a>
+              <div
+                class="mt-4 flex flex-wrap gap-x-8 gap-y-2 text-lg md:text-xl"
+              >
+                <a
+                  href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12676435/pdf/nihpp-rs7731109v1.pdf"
+                  target="_blank"
+                  class="text-blue-600 hover:underline"
+                  >📄 Paper</a
+                >
+                <a
+                  href="https://github.com/SunLab-SH/GraphMM"
+                  target="_blank"
+                  class="text-blue-600 hover:underline"
+                  >💻 GitHub</a
+                >
               </div>
             </div>
           </div>
@@ -165,86 +112,115 @@
             </div>
           </div>
 
-          <!-- 3. 视频区域 -->
-          <div class="py-12 bg-gray-50">
-            <div class="w-full max-w-[1200px] mx-auto px-4 md:px-8">
-              <h2 class="text-4xl md:text-5xl font-bold text-center mb-8">Overview Video</h2>
-              <video 
-                controls 
-                class="w-full rounded-lg shadow-lg"
-              >
-                <source src="video/homepagevideo.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              <p class="text-center text-gray-500 text-lg md:text-xl mt-4">Brief introduction of GraphMM.</p>
-            </div>
-          </div>
-
-          <!-- 4. Abstract 标题 + 一段话 -->
-          <div class="py-12 bg-white">
+          <!-- ========= 新增 Toy Model 模块 ========= -->
+          <div class="bg-white py-12">
             <div class="w-full max-w-[1400px] mx-auto px-4 md:px-8">
-              <h2 class="text-5xl md:text-6xl font-bold text-center mb-10">Abstract</h2>
-              <p class="text-gray-700 text-xl md:text-2xl leading-relaxed">
-                Understanding how molecular and cellular dynamics regulate tissue function remains a central challenge in biology. 
-                Here, we develop a graph-based metamodeling framework for modeling of complex biological systems and apply it to 
-                construct a comprehensive metamodel of the β-cell. The metamodel integrates 115 input models that describe various 
-                aspects of β-cell physiology across molecular, cellular, and multicellular spatial scales, spanning ten orders of 
-                magnitude in timescales. Validated against a broad range of experimental data, including fluorescence imaging, the 
-                metamodel uncovers how the interplay between gap junction coupling and K<sup>+</sup> channel–mediated signaling regulates islet
-                function. Moreover, the metamodel identifies and characterizes two types of hub cells, each deterministically driving 
-                islet activity and synchronization via unique ion channel properties. Perturbing channel conductance and hub cell 
-                activity recapitulates distinct diabetic phenotypes, highlighting them as mechanistic drivers of diabetes and potential 
-                therapeutic targets. Our metamodeling framework is broadly applicable to modeling other complex biological systems.
-              </p>
-            </div>
-          </div>
+              <!-- 标题带边框修饰（左侧边框） -->
+              <div class="mb-8">
+                <h2
+                  class="text-4xl md:text-5xl font-bold text-gray-800 border-l-8 border-blue-500 pl-4 inline-block"
+                >
+                  Toy Model
+                </h2>
+              </div>
 
-          <!-- 5. 三张竖着排列的大图 -->
-          <div class="py-12 bg-gray-50">
-            <div class="w-full max-w-[1400px] mx-auto px-4 md:px-8">
-              <!-- 第一张大图 -->
-              <div class="mb-16">
-                <img 
-                  src="img/fig2.png" 
-                  alt="Result 1"
-                  class="w-full rounded-lg shadow-lg"
-                />
-                <p class="text-center text-gray-600 text-lg md:text-xl mt-4">Multiscale β-cell metamodel under basal and glucose-stimulated conditions</p>
+              <!-- 左右两栏：左侧文字介绍，右侧图片 -->
+              <div class="flex flex-col md:flex-row gap-8 mb-12">
+                <div class="flex-1">
+                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                    To validate the GraphMM framework, we constructed a synthetic
+                    toy model consisting of two subsystems: a <strong>cell system</strong>
+                    (time step 0.01 min) and a <strong>body system</strong> (time step
+                    0.05 min). The cell system simulates insulin secretion dynamics,
+                    while the body system represents glucose absorption and distribution.
+                    These two systems operate at different temporal resolutions,
+                    making them an ideal testbed for multi‑scale coupling.
+                  </p>
+                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed mt-4">
+                    The ground truth (Truth) is known, allowing quantitative
+                    evaluation of the metamodel's accuracy. By converting each
+                    subsystem into a probabilistic surrogate model and introducing
+                    a coupling variable, GraphMM can statistically link the two
+                    scales and infer the joint dynamics.
+                  </p>
+                </div>
+                <div class="flex-1 flex justify-center">
+                  <img
+                    src="img/toymodel.png"
+                    alt="Toy Model Schematic"
+                    class="w-full max-w-md rounded-lg shadow-lg object-contain"
+                    onerror="this.src='https://via.placeholder.com/400x300?text=Toy+Model+Figure'"
+                  />
+                </div>
               </div>
-              
-              <!-- 第二张大图 -->
-              <div class="mb-16">
-                <img 
-                  src="img/fig4.png" 
-                  alt="Result 2"
-                  class="w-full rounded-lg shadow-lg"
-                />
-                <p class="text-center text-gray-600 text-lg md:text-xl mt-4">Effects of varying gap junction coupling and K<sub>ATP</sub>-mediated signaling across scales.</p>
-              </div>
-              
-              <!-- 第三张大图 -->
-              <div>
-                <img 
-                  src="img/fig7.png" 
-                  alt="Result 3"
-                  class="w-full rounded-lg shadow-lg"
-                />
-                <p class="text-center text-gray-600 text-lg md:text-xl mt-4">Schematic representation of the role of intercellular communication and hub cells in β-cell dynamics, activity and islet function.</p>
+
+              <!-- 下方：公式及 GraphMM 耦合讲解 -->
+              <div class="mt-8 bg-gray-50 p-6 rounded-lg shadow-inner">
+                <h3 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-4">
+                  GraphMM Coupling of the Toy Model
+                </h3>
+                <div class="overflow-x-auto">
+                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
+                    The coupling between the cell surrogate model and the body
+                    surrogate model is achieved by introducing a latent coupling
+                    variable <span class="font-mono font-bold">S<sup>c</sup><sub>cell</sub></span>.
+                    The connecting variables are the insulin secretion rates
+                    <span class="font-mono">S<sup>C</sup></span> (cell) and
+                    <span class="font-mono">S<sup>B</sup></span> (body). Their
+                    conditional distributions are defined as:
+                  </p>
+                  <div class="bg-white p-4 rounded-md shadow-sm mb-4 text-center">
+                    <p class="text-gray-800 text-lg md:text-xl font-mono">
+                      P(S<sup>B</sup><sub>t+1</sub> | S<sup>c</sup><sub>cell,t</sub>, S<sup>B</sup><sub>t</sub>) =
+                      N( ω₁·S<sup>c</sup><sub>cell,t</sub> + (1‑ω₁)·f<sup>B</sup>(S<sup>B</sup><sub>t</sub>, D<sub>t</sub>), φ₁ )
+                    </p>
+                    <p class="text-gray-800 text-lg md:text-xl font-mono mt-2">
+                      P(S<sup>C</sup><sub>t+1</sub> | S<sup>c</sup><sub>cell,t</sub>, S<sup>C</sup><sub>t</sub>) =
+                      N( ω₂·S<sup>c</sup><sub>cell,t</sub> + (1‑ω₂)·f<sup>C</sup>(S<sup>C</sup><sub>t</sub>, G<sub>t</sub>), φ₂ )
+                    </p>
+                  </div>
+                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                    Here, <span class="font-mono">f<sup>B</sup></span> and
+                    <span class="font-mono">f<sup>C</sup></span> are the original
+                    subsystem dynamics, <span class="font-mono">ω₁, ω₂</span> are
+                    weights determined by the overlap between the coupling variable
+                    distribution and each connecting variable distribution.
+                    The coupling variable itself is defined as a mixture of the
+                    two connecting variable distributions. By constructing a
+                    probabilistic graphical model (PGM) with edges from the coupling
+                    variable to both connecting variables, GraphMM enables joint
+                    inference using algorithms such as the Unscented Kalman Filter
+                    (UKF) or Particle Filter (PF). This approach significantly
+                    improves prediction accuracy compared to traditional
+                    common‑timestep integration (CTI).
+                  </p>
+                </div>
               </div>
             </div>
           </div>
+          <!-- ========= Toy Model 模块结束 ========= -->
         </div>
 
-        <!-- 其他视图（About 和详情页）保持占位，可根据需要扩展 -->
+        <!-- 其他视图（About 和详情页）保持占位 -->
         <div v-else-if="currentView === 'about'" class="py-16 max-w-6xl mx-auto px-4">
           <div class="h-10"></div>
-          <button @click="handleNavigation('home')" class="mb-8 flex items-center text-gray-600 hover:text-gray-800 text-lg">← Back to Home</button>
+          <button
+            @click="handleNavigation('home')"
+            class="mb-8 flex items-center text-gray-600 hover:text-gray-800 text-lg"
+          >
+            ← Back to Home
+          </button>
           <p class="text-xl">About page content...</p>
         </div>
 
         <div v-else class="py-16 max-w-4xl mx-auto px-4">
           <div class="h-10"></div>
-          <button @click="handleNavigation('home')" class="mb-8 flex items-center text-gray-600 hover:text-gray-800 text-lg">← Back</button>
+          <button
+            @click="handleNavigation('home')"
+            class="mb-8 flex items-center text-gray-600 hover:text-gray-800 text-lg"
+          >
+            ← Back
+          </button>
           <p class="text-xl">Detail page content...</p>
         </div>
       </main>
