@@ -8,6 +8,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="stylesheet" href="style.css" />
+    <style>
+      /* 两端对齐样式 */
+      .justify {
+        text-align: justify;
+      }
+    </style>
     <script>
       tailwind.config = {
         theme: {
@@ -102,7 +108,7 @@
                   class="w-full max-w-4xl rounded-lg shadow-lg"
                 />
               </div>
-              <p class="text-center text-gray-700 text-xl md:text-2xl mt-8 leading-relaxed">
+              <p class="text-center text-gray-700 text-xl md:text-2xl mt-8 leading-relaxed justify">
                 We introduce Graph-based Metamodeling (GraphMM), a novel framework that integrates models across multiple representations and spatiotemporal scales,
                 by (i) converting input models into universal surrogate representations using probabilistic graphical models; (ii) coupling surrogates across time 
                 scales using a standardized strategy; and (iii) approximate metamodel inference. Validation through synthetic benchmarks and real-world applications
@@ -127,7 +133,7 @@
               <!-- 左右两栏：左侧文字介绍，右侧图片（保持不变） -->
               <div class="flex flex-col md:flex-row gap-8 mb-12">
                 <div class="flex-1">
-                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed justify">
                     To validate the GraphMM framework, we constructed a synthetic
                     toy model consisting of two subsystems: a <strong>cell system</strong>
                     (time step 0.01 min) and a <strong>body system</strong> (time step
@@ -136,7 +142,7 @@
                     These two systems operate at different temporal resolutions,
                     making them an ideal testbed for multi‑scale coupling.
                   </p>
-                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed mt-4">
+                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed mt-4 justify">
                     The ground truth (Truth) is known, allowing quantitative
                     evaluation of the metamodel's accuracy. By converting each
                     subsystem into a probabilistic surrogate model and introducing
@@ -146,7 +152,7 @@
                 </div>
                 <div class="flex-1 flex justify-center">
                   <img
-                    src="img/toy_model_figure.png"
+                    src="img/toymodel.png"
                     alt="Toy Model Schematic"
                     class="w-full max-w-md rounded-lg shadow-lg object-contain"
                     onerror="this.src='https://via.placeholder.com/400x300?text=Toy+Model+Figure'"
@@ -154,7 +160,7 @@
                 </div>
               </div>
 
-              <!-- 下方：公式及 GraphMM 耦合讲解（现在改为左右两栏：左侧公式讲解，右侧小图） -->
+              <!-- 下方：公式及 GraphMM 耦合讲解（左右两栏：左侧公式讲解，右侧小图） -->
               <div class="mt-8 bg-gray-50 p-6 rounded-lg shadow-inner">
                 <div class="flex flex-col md:flex-row gap-6">
                   <!-- 左侧：公式和文字讲解 -->
@@ -163,7 +169,7 @@
                       GraphMM Coupling of the Toy Model
                     </h3>
                     <div class="overflow-x-auto">
-                      <p class="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
+                      <p class="text-gray-700 text-lg md:text-xl leading-relaxed mb-4 justify">
                         The coupling between the cell surrogate model and the body
                         surrogate model is achieved by introducing a latent coupling
                         variable <span class="font-mono font-bold">S<sup>c</sup><sub>cell</sub></span>.
@@ -182,7 +188,7 @@
                           N( ω₂·S<sup>c</sup><sub>cell,t</sub> + (1‑ω₂)·f<sup>C</sup>(S<sup>C</sup><sub>t</sub>, G<sub>t</sub>), φ₂ )
                         </p>
                       </div>
-                      <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                      <p class="text-gray-700 text-lg md:text-xl leading-relaxed justify">
                         Here, <span class="font-mono">f<sup>B</sup></span> and
                         <span class="font-mono">f<sup>C</sup></span> are the original
                         subsystem dynamics, <span class="font-mono">ω₁, ω₂</span> are
@@ -213,8 +219,6 @@
             </div>
           </div>
 
-
-
           <!-- ========= Real Model 模块 (MuBCM) - 修改版：文字在上，图单独一行 ========= -->
           <div class="bg-gray-50 py-12">
             <div class="w-full max-w-[1400px] mx-auto px-4 md:px-8">
@@ -229,7 +233,7 @@
 
               <!-- 文字介绍（放在图的上方） -->
               <div class="mb-8">
-                <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                <p class="text-gray-700 text-lg md:text-xl leading-relaxed justify">
                   The <strong>Multiscale β-cell Metamodel (MuBCM)</strong> integrates three
                   existing mechanistic models that describe different aspects and scales of
                   pancreatic β-cell physiology: the <strong>Vesicle Exocytosis (VE) model</strong>
@@ -243,19 +247,20 @@
                   in time and captures glucose‑stimulated insulin secretion, calcium dynamics,
                   and islet synchronization.
                 </p>
-                <p class="text-gray-700 text-lg md:text-xl leading-relaxed mt-4">
+                <p class="text-gray-700 text-lg md:text-xl leading-relaxed mt-4 justify">
                   Validated against experimental data (fluorescence imaging, patch‑clamp), MuBCM
                   reveals how gap junction coupling and K<sub>ATP</sub> channel signaling regulate
                   islet function, and identifies two types of hub cells that drive islet activity.
                 </p>
               </div>
 
-              <!-- 图片单独一行（居中） -->
-              <div class="flex justify-center mb-12">
+              <!-- 图片单独一行（居中），放大1.8倍 -->
+              <div class="flex justify-center mb-12 overflow-visible">
                 <img
                   src="img/real_model.png"
                   alt="Multiscale β-cell Metamodel Overview"
-                  class="w-full max-w-2xl rounded-lg shadow-lg object-contain"
+                  class="rounded-lg shadow-lg object-contain"
+                  style="transform: scale(1.8); transform-origin: center; max-width: none; width: auto;"
                   onerror="this.src='https://via.placeholder.com/800x400?text=MuBCM+Figure'"
                 />
               </div>
@@ -266,17 +271,17 @@
                   GraphMM Coupling of the Three β‑cell Models
                 </h3>
                 <div class="overflow-x-auto">
-                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
+                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed mb-4 justify">
                     The three surrogate models (VE, ISK, ICN) are coupled by introducing two
                     latent coupling variables: <span class="font-mono font-bold">N<sub>FR</sub></span>
                     (linking VE and ISK) and <span class="font-mono font-bold">Ca<sub>ic</sub></span>
                     (linking ISK and ICN). The connecting variables are:
                   </p>
-                  <ul class="list-disc pl-6 mb-4 text-gray-700 text-lg md:text-xl">
+                  <ul class="list-disc pl-6 mb-4 text-gray-700 text-lg md:text-xl justify">
                     <li>For VE–ISK coupling: the number of fused vesicles <span class="font-mono">N<sub>F</sub><sup>VE</sup></span> and the number of releasing vesicles <span class="font-mono">N<sub>R</sub><sup>ISK</sup></span> are connected via <span class="font-mono">N<sub>FR</sub></span>.</li>
                     <li>For ISK–ICN coupling: the cytosolic Ca²⁺ concentrations <span class="font-mono">Ca<sub>ic</sub><sup>ISK</sup></span> and <span class="font-mono">Ca<sub>ic</sub><sup>ICN</sup></span> are connected via <span class="font-mono">Ca<sub>ic</sub></span>.</li>
                   </ul>
-                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
+                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed mb-4 justify">
                     The conditional distributions for the coupling variables are defined analogously to the toy model.
                     For the VE–ISK coupling:
                   </p>
@@ -288,7 +293,7 @@
                       P(N<sub>R</sub><sup>ISK</sup><sub>t+1</sub> | N<sub>FR,t</sub>, N<sub>R</sub><sup>ISK</sup><sub>t</sub>) = N( β·N<sub>FR,t</sub> + (1‑β)·f<sup>ISK</sup>(…), ψ<sub>2</sub> )
                     </p>
                   </div>
-                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                  <p class="text-gray-700 text-lg md:text-xl leading-relaxed justify">
                     Similarly, the Ca²⁺ coupling uses the same weighted mixture approach.
                     The full probabilistic graphical model (PGM) includes directed edges from each coupling
                     variable to its respective connecting variables. Inference is performed using
@@ -301,31 +306,8 @@
               </div>
             </div>
           </div>
-
-
-        <!-- 其他视图（About 和详情页）保持占位 -->
-        <div v-else-if="currentView === 'about'" class="py-16 max-w-6xl mx-auto px-4">
-          <div class="h-10"></div>
-          <button
-            @click="handleNavigation('home')"
-            class="mb-8 flex items-center text-gray-600 hover:text-gray-800 text-lg"
-          >
-            ← Back to Home
-          </button>
-          <p class="text-xl">About page content...</p>
         </div>
-
-        <div v-else class="py-16 max-w-4xl mx-auto px-4">
-          <div class="h-10"></div>
-          <button
-            @click="handleNavigation('home')"
-            class="mb-8 flex items-center text-gray-600 hover:text-gray-800 text-lg"
-          >
-            ← Back
-          </button>
-          <p class="text-xl">Detail page content...</p>
-        </div>
-      </main>
+      
 
       <!-- 页脚 -->
       <footer id="about" class="bg-gray-800 text-white py-6">
